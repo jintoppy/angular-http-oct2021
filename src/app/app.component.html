@@ -1,1 +1,6 @@
-Basic
+<ul>
+  <li *ngFor="let user of users">
+    {{user.login}}
+    <img [src]="user.avatar_url" height="100" />
+  </li>
+</ul>
