@@ -1,6 +1,11 @@
+<button>Start</button>
+<button>Pause</button>
+<button>Reset</button>
+<h2>{{10 | currency:'INR'}}</h2>
+
 <ul>
-  <li *ngFor="let user of users">
-    {{user.login}}
+  <li *ngFor="let user of users$ | async">
+    {{user.login | uppercase }}
     <img [src]="user.avatar_url" height="100" />
   </li>
 </ul>

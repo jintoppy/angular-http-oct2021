@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AppService } from './app.service';
 import { User } from './models/user';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,16 +10,13 @@ import { User } from './models/user';
 })
 export class AppComponent {
   title = 'angular-http';
-  users:User[] = [];
+  users$?:Observable<User[]>;
 
   constructor(private service: AppService){
 
   }
 
   ngOnInit(){
-    this.service.getUsers()
-          .subscribe(users => {
-            this.users = users;
-          });
+    this.users$ = this.service.getUsers();
   }
 }
