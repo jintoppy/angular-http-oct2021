@@ -12,4 +12,8 @@ export class Child1Component implements OnInit {
   ngOnInit(): void {
   }
 
+  onAdd(fruitName:string){
+    console.log(fruitName);
+  }
+
 }

@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./child2.component.css']
 })
 export class Child2Component implements OnInit {
-  fruits:string[] = [];
   constructor() { }
 
   ngOnInit(): void {
