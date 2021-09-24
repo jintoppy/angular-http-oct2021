@@ -17,6 +17,6 @@ export class AppComponent {
   }
 
   ngOnInit(){
-    this.users$ = this.service.getUsers();
+    this.users$ = this.service.getUsers();   
   }
 }
