@@ -2,15 +2,21 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from './models/user';
 import { map } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
-  fruits$: Subject<string> = new Subject<string>();
+  private fruits: string[] = [];
+  fruits$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>(this.fruits);
   constructor(private http: HttpClient) { }
+
+  addFruit(fruitName:string){
+    this.fruits.push(fruitName);
+    this.fruits$.next(this.fruits);
+  }
 
   getUsers(){
     return this.http

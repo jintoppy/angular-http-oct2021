@@ -1,5 +1,10 @@
 
 <div class="container">
     <h2>Child2</h2>
-    <h2>A new Fruit is added : apple</h2>
+    <h2 *ngIf="fruitName">A new Fruit is added : {{fruitName}}</h2>
+    <ul>
+        <li *ngFor="let fruit of fruits">
+            {{fruit}}
+        </li>
+    </ul>
 </div>

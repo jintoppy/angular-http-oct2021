@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-child1',
@@ -7,13 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Child1Component implements OnInit {
 
-  constructor() { }
+  constructor(private service: AppService) { }
 
   ngOnInit(): void {
   }
 
   onAdd(fruitName:string){
-    console.log(fruitName);
+    this.service.addFruit(fruitName);
   }
 
 }
