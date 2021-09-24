@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { AppService } from './app.service';
 import { User } from './models/user';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, switchMap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -11,18 +12,27 @@ import { Observable } from 'rxjs';
 export class AppComponent {
   title = 'angular-http';
   users$?:Observable<User[]>;
+  searchTerm$: Subject<string> = new Subject<string>();
 
   constructor(private service: AppService){
 
   }
 
   ngOnInit(){
-    
+    this.users$ = this.searchTerm$
+        .pipe(
+          debounceTime(200),
+          distinctUntilChanged(),
+          filter(val => val.length > 3),
+          switchMap(val => this.service.getUsers(val)),
+          // map((users:User[]) => users.slice(0,2))
+        );
   }
 
   onInputChange(val: string){
-    console.log(val);
-    this.users$ = this.service.getUsers(val);
+    
+    this.searchTerm$.next(val);
+    // this.users$ = this.service.getUsers(val);
   }
 
   
