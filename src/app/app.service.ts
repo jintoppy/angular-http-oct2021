@@ -4,6 +4,12 @@ import { User } from './models/user';
 import { map } from 'rxjs/operators';
 import { Subject, BehaviorSubject } from 'rxjs';
 
+interface ISearchResult {
+  total_count: number;
+  incomplete_results: boolean;
+  items: User[]
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,15 +20,19 @@ export class AppService {
   constructor(private http: HttpClient) { }
 
   addFruit(fruitName:string){
-    this.fruits.push(fruitName);
+    this.fruits = [...this.fruits, fruitName];
     this.fruits$.next(this.fruits);
   }
 
-  getUsers(){
+  getFruit(){
+    return this.fruits;
+  }
+
+  getUsers(query:string){
     return this.http
-              .get<User[]>('https://api.github.com/users')
+              .get<ISearchResult>(`https://api.github.com/search/users?q=${query}`)
               .pipe(
-                map(users => users.slice(0,2))
+                map(searchResult => searchResult.items)
               )
   }
 }

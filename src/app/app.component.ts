@@ -17,6 +17,13 @@ export class AppComponent {
   }
 
   ngOnInit(){
-    this.users$ = this.service.getUsers();   
+    
   }
+
+  onInputChange(val: string){
+    console.log(val);
+    this.users$ = this.service.getUsers(val);
+  }
+
+  
 }

@@ -2,13 +2,17 @@
 <button>Pause</button>
 <button>Reset</button>
 <h2>{{10 | currency:'INR'}}</h2>
+-->
+
+<input type="text" placeholder="Search" (keyup)="onInputChange(searchTxt.value)" #searchTxt>
 
 <ul>
   <li *ngFor="let user of users$ | async">
     {{user.login | uppercase }}
     <img [src]="user.avatar_url" height="100" />
   </li>
-</ul> -->
+</ul> 
 
-<app-child1></app-child1>
-<app-child2></app-child2>
+<!-- <app-child1></app-child1>
+<app-child2></app-child2> -->
+

@@ -15,7 +15,6 @@ export class Child2Component implements OnInit {
     this.service.fruits$.subscribe(fruits => {
       this.fruits = fruits;
     });
-
   }
 
 }
